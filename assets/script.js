@@ -14,36 +14,6 @@
     lastY = y;
   }, { passive: true });
 
-  // Mobile menu toggle
-  const menuToggle = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('.site-nav');
-
-  if (menuToggle && nav) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      nav.classList.toggle('active');
-      document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Close menu when clicking a nav link
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        nav.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-        menuToggle.classList.remove('active');
-        nav.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
   // Smooth anchor scrolling with offset for fixed header
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -78,6 +48,46 @@
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
     document.body.appendChild(script);
+  }
+
+  // Active section highlighting in navbar
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
+
+  if (sections.length > 0 && navLinks.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-100px 0px -66%',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+
+          // Remove active class from all nav links
+          navLinks.forEach(function(link) {
+            link.classList.remove('active');
+          });
+
+          // Add active class to the corresponding nav link
+          navLinks.forEach(function(link) {
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+              console.log('Active section:', id); // Debug log
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    sections.forEach(function(section) {
+      observer.observe(section);
+    });
+
+    console.log('Section highlighting initialized'); // Debug log
   }
 })();
 
