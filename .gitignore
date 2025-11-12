@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Archives
+*.zip
+*.tar.gz
+
+# Temporary files
+*.log
+temp_ppt/
+
+# Documents (keep originals separate from deployment)
+*.docx
+*.pptx
+*.pdf
