@@ -18,3 +18,11 @@ temp_ppt/
 *.docx
 *.pptx
 *.pdf
+
+# Local Netlify folder
+.netlify
+
+# Razorpay credentials
+rzp-key.csv
+*.env
+.env*

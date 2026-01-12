@@ -91,4 +91,124 @@
   }
 })();
 
+// Razorpay Donation Integration
+// TODO: Replace with your live Razorpay Key ID before going to production
+const RAZORPAY_KEY = 'YOUR_RAZORPAY_KEY_ID';
+let selectedAmount = 0;
 
+function openDonationModal() {
+  document.getElementById('donationModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDonationModal() {
+  document.getElementById('donationModal').classList.remove('active');
+  document.body.style.overflow = '';
+  // Reset form
+  selectedAmount = 0;
+  document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+  document.getElementById('customAmount').value = '';
+  document.getElementById('donorName').value = '';
+  document.getElementById('donorEmail').value = '';
+  document.getElementById('donorPhone').value = '';
+}
+
+// Amount button selection
+document.addEventListener('DOMContentLoaded', function() {
+  const amountBtns = document.querySelectorAll('.amount-btn');
+  const customAmountInput = document.getElementById('customAmount');
+
+  amountBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      amountBtns.forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedAmount = parseInt(this.dataset.amount);
+      customAmountInput.value = '';
+    });
+  });
+
+  customAmountInput.addEventListener('input', function() {
+    amountBtns.forEach(b => b.classList.remove('selected'));
+    selectedAmount = parseInt(this.value) || 0;
+  });
+
+  // Close modal on outside click
+  document.getElementById('donationModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeDonationModal();
+    }
+  });
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeDonationModal();
+    }
+  });
+});
+
+function initiatePayment() {
+  const name = document.getElementById('donorName').value.trim();
+  const email = document.getElementById('donorEmail').value.trim();
+  const phone = document.getElementById('donorPhone').value.trim();
+
+  // Validation
+  if (selectedAmount < 1) {
+    alert('Please select or enter a donation amount');
+    return;
+  }
+  if (!name) {
+    alert('Please enter your name');
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address');
+    return;
+  }
+  if (!phone || phone.length < 10) {
+    alert('Please enter a valid phone number');
+    return;
+  }
+
+  const options = {
+    key: RAZORPAY_KEY,
+    amount: selectedAmount * 100, // Razorpay expects amount in paise
+    currency: 'INR',
+    name: 'Reminiscence Welfare Trust',
+    description: 'Donation to RWT',
+    image: 'https://reminiscencewelfaretrust.org/assets/logo.png',
+    handler: function(response) {
+      // Payment successful
+      alert('Thank you for your donation! Payment ID: ' + response.razorpay_payment_id);
+      closeDonationModal();
+      // You can send this to your server to verify and record
+      console.log('Payment successful:', response);
+    },
+    prefill: {
+      name: name,
+      email: email,
+      contact: phone
+    },
+    notes: {
+      purpose: 'Donation',
+      donor_name: name
+    },
+    theme: {
+      color: '#2d5a27'
+    },
+    modal: {
+      ondismiss: function() {
+        console.log('Payment modal closed');
+      }
+    }
+  };
+
+  const rzp = new Razorpay(options);
+
+  rzp.on('payment.failed', function(response) {
+    alert('Payment failed. Please try again. Error: ' + response.error.description);
+    console.error('Payment failed:', response.error);
+  });
+
+  rzp.open();
+}

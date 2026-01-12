@@ -16,6 +16,7 @@
     />
     <link rel="stylesheet" href="assets/styles.css" />
     <link rel="icon" href="assets/favicon.jpg" type="image/jpeg" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -31,6 +32,7 @@
         <a href="#impact">Impact</a>
         <a href="#work">Our Work</a>
         <a href="#gallery">Gallery</a>
+        <a href="#donate">Donate</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="mobile-menu-toggle" aria-label="Toggle menu">
@@ -78,7 +80,7 @@
           </div>
 
           <div class="cta-row">
-            <a href="#contact" class="btn primary">Donate Now</a>
+            <a href="#donate" class="btn primary">Donate Now</a>
             <a href="#about" class="btn">Our Story</a>
           </div>
         </div>
@@ -88,23 +90,37 @@
         <div class="container">
           <h2>How it started</h2>
           <p>
-            During the second Covid-19 wave in April 2021, alumni of the
-            Veterinary College, Bengaluru (6 series, 1986–1991), came together
-            as the "Reminiscence Batch" to support underprivileged people in
-            crisis. Guided by Dr. Renukaradhya Gourapura and many like‑minded
-            classmates, and led from the front by Col. Jagdish M (Retd) and Dr
-            Sridharamurthy S.R. PhD, the group quickly mobilized resources,
-            purchased oxygen concentrators, and organized critical logistics to
-            reach patients despite lockdowns.
+            During the COVID-19 pandemic, 62 veterinarians from the 1986-1991 batch of the
+            Veterinary College, Bengaluru, India, established the "Reminiscence Welfare Trust"
+            in April 2021. The trust was formally registered as a non-profit organization with
+            the Government of India (Registration No. BK IV 163/22-23, dated August 2nd, 2022).
           </p>
           <p>
-            By the end of April 2021, 62 batchmates formed the Reminiscence
-            Welfare Trust (RWT), each contributing a minimum of ₹5,000. Before
-            formal registration, donations were routed through a partner NGO
-            account to accelerate relief. What began as emergency Covid care
-            soon expanded into sustained support for education, farming, animal
-            husbandry, disability assistance, and community health.
+            Guided by Professor Renukaradhya J. Gourapura, PhD, and led by Col. Dr. Jagdish M (Retd),
+            Dr. Sridharamurthy S.R., PhD, and other compassionate classmates, RWT has collectively
+            contributed over <strong>₹43 lakhs (~US$50,000)</strong> to date, all in compliance with tax regulations.
+            To date, RWT has identified and supported more than <strong>250 beneficiaries</strong>, initially focusing
+            on COVID-19 patients and later expanding its efforts to include:
           </p>
+          <ul class="about-list">
+            <li>Education for underprivileged children, especially girls from first grade to professional degrees</li>
+            <li>Support for poor farmers engaged in animal husbandry</li>
+            <li>Assistance for individuals with mental or physical disabilities</li>
+            <li>Community health initiatives</li>
+          </ul>
+          <p>
+            Now in its fifth year, RWT continues to grow, inspiring veterinarians and other professionals
+            to undertake similar community initiatives. Our vision is to empower people and support
+            developmental efforts in rural and small-town India.
+          </p>
+
+          <div class="mission-box">
+            <h3>Our Mission</h3>
+            <p>
+              To help fund the education of underprivileged, talented students in rural areas and small towns,
+              and to improve the livelihood of poor farmers engaged in animal husbandry activities.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -121,7 +137,7 @@
               <div class="stat-label">Donated to beneficiaries</div>
             </div>
             <div class="stat">
-              <div class="stat-value">248+</div>
+              <div class="stat-value">250+</div>
               <div class="stat-label">Beneficiaries supported</div>
             </div>
             <div class="stat">
@@ -443,10 +459,10 @@
 
                 <a
                   href="https://wa.me/919481215280?text=Hello,%20I%20would%20like%20to%20contribute%20to%20RWT"
-                  class="btn primary"
+                  class="btn"
                   target="_blank"
                   rel="noopener"
-                  >Donate via WhatsApp</a
+                  >Contact via WhatsApp</a
                 >
               </div>
             </div>
@@ -456,6 +472,51 @@
             Reminiscence Welfare Trust registered at RR Nagar Sub-Registrar
             Office, Bengaluru on 02 August 2022
           </p>
+        </div>
+      </section>
+
+      <!-- Donate Section with Razorpay Payment Button -->
+      <section id="donate" class="section donate-section">
+        <div class="container">
+          <h2>Make a Donation</h2>
+          <p class="section-intro">
+            Your contribution helps us support education, healthcare, and livelihoods
+            across rural Karnataka. All donations are eligible for <strong>80G tax exemption</strong>.
+          </p>
+
+          <div class="donate-wrapper">
+            <div class="donate-card">
+              <div class="donate-icon">❤️</div>
+              <h3>Donate Online</h3>
+              <p>Secure payment via Razorpay. You will receive an 80G tax exemption receipt automatically.</p>
+
+              <div class="razorpay-button-container">
+                <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Rt6dbId6yeAa13" async> </script> </form>
+              </div>
+
+              <p class="donate-note">Accepts UPI, Cards, Net Banking & Wallets</p>
+            </div>
+
+            <div class="donate-card">
+              <div class="donate-icon">🏦</div>
+              <h3>Bank Transfer</h3>
+              <p>Transfer directly to our bank account for larger donations.</p>
+
+              <div class="bank-details-mini">
+                <p><strong>Reminiscence Welfare Trust</strong></p>
+                <p>A/C: 922020052904098</p>
+                <p>IFSC: UTIB0000559</p>
+                <p>Axis Bank, Rajajinagar</p>
+              </div>
+
+              <a
+                href="https://wa.me/919481215280?text=Hello,%20I%20have%20made%20a%20bank%20transfer%20donation%20to%20RWT"
+                class="btn"
+                target="_blank"
+                rel="noopener"
+              >Confirm via WhatsApp</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
